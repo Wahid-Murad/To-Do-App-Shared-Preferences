@@ -11,6 +11,8 @@ class DatePickerController extends GetxController {
   RxString titleText = RxString("");
   RxString dateortimepicker = RxString("");
   RxString dateortimepicker2 = RxString("");
+    Rx<DateTime> selectedDate2 = Rx<DateTime>(DateTime.now());
+
   //var dateortime;
   DateTime? selectedDate;
 }

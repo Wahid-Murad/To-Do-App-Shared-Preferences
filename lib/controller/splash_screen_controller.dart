@@ -4,6 +4,7 @@ import 'package:add_to_do/screens/home_page.dart';
 import 'package:get/get.dart';
 
 class SplashScreenController extends GetxController {
+
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -18,7 +19,7 @@ class SplashScreenController extends GetxController {
   timeDuration() async {
     //await loginController.removeToken();
     Timer(Duration(seconds: 3), () {
-      Get.to(() => HomePage());
+      Get.offAll(() => HomePage());
     });
   }
 }

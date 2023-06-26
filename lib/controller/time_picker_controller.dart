@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:add_to_do/controller/date_picker_controller.dart';
 import 'package:add_to_do/controller/date_time_controller.dart';
 import 'package:add_to_do/controller/listview_controller.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class TimePickerController extends GetxController {
   var hour = 0.obs;
@@ -17,14 +14,14 @@ class TimePickerController extends GetxController {
   RxString endTime = "".obs;
   var selectedText = "";
   RxString titleText = RxString("");
-  var presentHour=DateTime.now().hour.obs;
-  var presentMin=DateTime.now().minute.obs;
+  var presentHour = DateTime.now().hour.obs;
+  var presentMin = DateTime.now().minute.obs;
 
   DateTimeHandler dateTimeHandler = Get.put(DateTimeHandler());
   DatePickerController datePickerController = Get.put(DatePickerController());
   ListviewController listviewController = Get.put(ListviewController());
 
-     setStartHourMin() {
+  setStartHourMin() {
     // dateTimeHandler.startTime.value =
     //     "${hour.value.toString().padLeft(2, '0')}:${minute.value.toString().padLeft(2, '0')}";
     // dateTimeHandler.addDateTime(dateTimeHandler.startTime);
@@ -37,35 +34,57 @@ class TimePickerController extends GetxController {
       print(presentHour);
       if (selecetedTime - initialTime < 0) {
         dateTimeHandler.startTime.value = '';
-            print(presentHour);
-        return Get.snackbar('Incorrect Time',
-                        'Please Select a valid Time',
-                        colorText: Colors.red,
-                        snackPosition: SnackPosition.BOTTOM);
-                    
-
-         } else {
+        print(presentHour);
+        return Get.snackbar('Incorrect Time', 'Please Select a valid Time',
+            colorText: Colors.amberAccent, snackPosition: SnackPosition.BOTTOM);
+      } else {
         dateTimeHandler.startTime.value =
             "${presentHour.value.toString().padLeft(2, '0')}:${presentMin.value.toString().padLeft(2, '0')}";
-           // print(presentHour);
+        // print(presentHour);
       }
     } else {
       dateTimeHandler.startTime.value =
           "${hour.value.toString().padLeft(2, '0')}:${minute.value.toString().padLeft(2, '0')}";
-          //print(presentHour);
+      //print(presentHour);
     }
-  
+
     //dateTimeHandler.startTime.value = dateTimeHandler.startTime.value;
     Get.back();
   }
 
-
-
-
-  void setEndHourMin() {
-    dateTimeHandler.endTime.value =
+  setEndHourMin() {
+    // dateTimeHandler.endTime.value =
+    //     "${endHour.value.toString().padLeft(2, '0')}:${endMinute.value.toString().padLeft(2, '0')}";
+    // dateTimeHandler.addDateTime(dateTimeHandler.endTime);
+    // Get.back();
+    
+    if (datePickerController.dateortimepicker.value ==
+            datePickerController.dateortimepicker2.value ||
+        datePickerController.dateortimepicker2.value == '') {
+      var forTodayDate = presentHour.value + (presentMin.value / 60);
+      var forFutureDate = hour.value + (minute.value / 60);
+      var forEndTime = endHour.value + (endMinute.value / 60);
+      if (forEndTime - forFutureDate < 0 || forEndTime - forTodayDate < 0) {
+        dateTimeHandler.endTime.value = '';
+        print(forEndTime);
+        print(forFutureDate);
+        return Get.snackbar(
+            'Incorrect EndTime', 'Please select a valid EndTime',
+            duration: Duration(milliseconds: 500),
+            colorText: Colors.amberAccent, snackPosition: SnackPosition.BOTTOM
+            );
+      }
+        else{
+          // print(forEndTime);
+       // print(forFutureDate);
+          dateTimeHandler.endTime.value =
         "${endHour.value.toString().padLeft(2, '0')}:${endMinute.value.toString().padLeft(2, '0')}";
-    dateTimeHandler.addDateTime(dateTimeHandler.endTime);
+        }
+    }
+    else{
+        dateTimeHandler.endTime.value =
+        "${endHour.value.toString().padLeft(2, '0')}:${endMinute.value.toString().padLeft(2, '0')}";
+    }
     Get.back();
   }
 
@@ -76,8 +95,8 @@ class TimePickerController extends GetxController {
             datePickerController.dateortimepicker2 &&
         (et - st) < 0) {
       dateTimeHandler.endTime.value = '';
-      Get.snackbar('Required Data Not Filled Properly',
-          'Plesae Fill all Required fields',
+      Get.snackbar('Time Invalid',
+          'Plesae Enter a valid Time',
           // titleText: Text(
           //   "Not Selected",
           //   style: TextStyle(color: Colors.red),

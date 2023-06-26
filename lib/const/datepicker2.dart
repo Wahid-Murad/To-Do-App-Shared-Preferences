@@ -1,4 +1,5 @@
 import 'package:add_to_do/controller/date_picker_controller.dart';
+import 'package:add_to_do/controller/listview_controller.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class DatePicker2 extends StatelessWidget {
   final String titleText;
 
   DatePickerController datePickerController = Get.put(DatePickerController());
+  ListviewController listviewController = Get.put(ListviewController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class DatePicker2 extends StatelessWidget {
         if (isInitialDateTime == true) {
           DateTime? pickStartDate = await showDatePicker(
               context: context,
-              initialDate: datePickerController.selectedStartDate.value,
+              initialDate:  datePickerController.selectedStartDate.value,//listviewController.noteId.value!='' ? : datePickerController.selectedDate2.value
               firstDate: DateTime.now(), //DateTime(2000),
               lastDate: DateTime(2101));
           if (pickStartDate != null) {
@@ -54,6 +56,7 @@ class DatePicker2 extends StatelessWidget {
               //   style: TextStyle(color: Colors.redAccent),
               // ),
               colorText: Colors.red,
+              duration: Duration(seconds: 1),
               // backgroundColor: Colors.black54,
               snackPosition: SnackPosition.BOTTOM);
         } else if (isInitialDateTime == false) {
@@ -66,20 +69,20 @@ class DatePicker2 extends StatelessWidget {
               firstDate: datePickerController.selectedStartDate.value,
               lastDate: DateTime(2101));
 
-          if (pickEndDate!
-              .isAfter(datePickerController.selectedStartDate.value)) {
-            datePickerController.selectedEndDate.value = pickEndDate;
-          }
+          // if (pickEndDate!.isAfter(datePickerController.selectedStartDate.value)) {
+          //   datePickerController.selectedEndDate.value = pickEndDate;
+          // }
           datePickerController.dateortimepicker2.value =
-              formatDate(pickEndDate, [dd, ".", " ", MM, " ", yyyy]);
+              formatDate(pickEndDate!, [dd, ".", " ", MM, " ", yyyy]);
         } else if (datePickerController.selectedStartDate.value
             .isAfter(datePickerController.selectedEndDate.value)) {
           datePickerController.dateortimepicker2.value = '';
-        } else if (datePickerController.selectedEndDate.value
-            .isAfter(datePickerController.selectedStartDate.value)) {
-          print("End date is greater than start date");
+        // } else if (datePickerController.selectedEndDate.value
+        //     .isAfter(datePickerController.selectedStartDate.value)) {
+        //   print("End date is greater than start date");
         } else if (datePickerController.selectedEndDate.value
             .isAtSameMomentAs(datePickerController.selectedStartDate.value)) {
+               datePickerController.dateortimepicker2.value;
           print("Same Date");
         }
       },

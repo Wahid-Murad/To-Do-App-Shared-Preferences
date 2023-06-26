@@ -27,7 +27,7 @@ class CustomSpinnerTimePickerPopUP {
             padding: EdgeInsets.zero,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10), color: Colors.white),
-            height: height - 430,
+            height: height/4,
             width: width - 59,
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,

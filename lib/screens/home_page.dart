@@ -28,26 +28,25 @@ class HomePage extends StatelessWidget {
         body: Obx(() => Column(
                   children: [
                     listviewController.valueList.isEmpty
-                        ? SingleChildScrollView(
-                          child: SizedBox(
-                            height: MediaQuery.of(context).size.height - 34,
-                            child: Center(
-                               child: CustomButton(
-                                  width: 120,
-                                  heiht: 45,
-                                  title: 'Add ToDo',
-                                  onPressed: () {
-                                    listviewController.noteId.value='';
-                                    listviewController.notewordCount.value = 0;
-                                     listviewController.clearAllData();
-                                    Get.to(() => AddToDo());
-                                  },
-                                ),
+                        ? SizedBox(
+                          height: MediaQuery.of(context).size.height-34,
+                          child: Center(
+                             child: CustomButton(
+                                width: 120,
+                                heiht: 45,
+                                title: 'Add ToDo',
+                                onPressed: () {
+                                  listviewController.noteId.value='';
+                                  //print(listviewController.noteId.value='');
+                                  listviewController.notewordCount.value = 0;
+                                   listviewController.clearAllData();
+                                  Get.offAll(() => AddToDo());
+                                },
                               ),
                             ),
-                        )
+                          )
                         : Padding(
-                            padding: const EdgeInsets.only(top: 20, right: 15),
+                            padding: const EdgeInsets.only(top: 16,right: 16,left: 16,bottom: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -64,9 +63,6 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-            SizedBox(
-              height: 10,
-            ),
             NoteDateFormat(),
           ],
         ),

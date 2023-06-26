@@ -43,40 +43,32 @@ class NoteDateFormat extends StatelessWidget {
                     dateTimeHandler.endTime.value =
                         listviewController.valueList[index].endTime;
                     listviewController.notewordCount.value;
-                    Get.to(AddToDo());
+                    Get.offAll(AddToDo());
                   },
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5)
-                            .copyWith(top: 0),
+                    padding: const EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 8),
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         border: Border.all(width: 1, color: Color(0XFFDCDCDC)),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16, top: 16, bottom: 16),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${listviewController.valueList[index].titleText}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0XFF212121)),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10,top: 4,bottom: 4),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                   Text(
+                                '${listviewController.valueList[index].titleText}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0XFF212121)),
+                              ),
+                                  Text(
                                     '${listviewController.valueList[index].noteText}',
                                     style: TextStyle(
                                       fontSize: 16,
@@ -84,36 +76,38 @@ class NoteDateFormat extends StatelessWidget {
                                       color: Color(0XFF8A8A8A),
                                     ),
                                     overflow: TextOverflow
-                                        .ellipsis, // Add this line to handle overflow
+                                    .ellipsis,
                                   ),
-                                ),
-                                IconButton(
-                                  onPressed: () async {
-                                    await spHandler.deleteAfterLoadData(
+                                   Text(
+                                  '${listviewController.valueList[index].startDate} at ${listviewController.valueList[index].startTime}'),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(onPressed: ()async{
+                              key: ValueKey(listviewController.valueList[index].id);
+                                  await spHandler.deleteAfterLoadData(
                                         listviewController.valueList[index].id);
                                     Get.snackbar(
                                       'Data Deleted',
                                       'Data Deleted Successfully',
                                       colorText: Colors.red,
+                                      duration: Duration(milliseconds: 500),
                                       snackPosition: SnackPosition.BOTTOM,
                                     );
-                                  },
-                                  icon: Icon(Icons.delete),
-                                  iconSize: 20,
-                                  color: Color(0XFFFF4949),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                                '${listviewController.valueList[index].startDate} at ${listviewController.valueList[index].startTime}'),
-                          ],
-                        ),
+                             }, child: Padding(
+                               padding: const EdgeInsets.only(left: 30),
+                               child: Image.asset('assets/images/delete.png',height: 16,width: 16,),
+                             ),
+                             ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
+            
                 );
               }
               //If enddate are empty but entime is Notempty
@@ -136,38 +130,31 @@ class NoteDateFormat extends StatelessWidget {
                         listviewController.valueList[index].endTime;
                     Get.to(AddToDo());
                   },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5)
-                            .copyWith(top: 0),
+                child: Padding(
+                    padding: const EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 8),
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
+                     // width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         border: Border.all(width: 1, color: Color(0XFFDCDCDC)),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16, top: 16, bottom: 16),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${listviewController.valueList[index].titleText}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0XFF212121)),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10,top: 4,bottom: 4),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                   Text(
+                                '${listviewController.valueList[index].titleText}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0XFF212121)),
+                              ),
+                                  Text(
                                     '${listviewController.valueList[index].noteText}',
                                     style: TextStyle(
                                       fontSize: 16,
@@ -175,36 +162,34 @@ class NoteDateFormat extends StatelessWidget {
                                       color: Color(0XFF8A8A8A),
                                     ),
                                     overflow: TextOverflow
-                                        .ellipsis, // Add this line to handle overflow
+                                    .ellipsis,
                                   ),
-                                ),
-                                IconButton(
-                                  onPressed: () async {
-                                    await spHandler.deleteAfterLoadData(
-                                        listviewController.valueList[index].id);
-                                    Get.snackbar(
-                                      'Data Deleted',
-                                      'Data Deleted Successfully',
-                                      colorText: Colors.red,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    );
-                                  },
-                                  icon: Icon(Icons.delete),
-                                  iconSize: 20,
-                                  color: Color(0XFFFF4949),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
+                                 Text(
                                 '${listviewController.valueList[index].startDate} at ${listviewController.valueList[index].startTime} - ${listviewController.valueList[index].endTime}'),
-                          ],
-                        ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          TextButton(onPressed: ()async{
+                                await spHandler.deleteAfterLoadData(
+                                      listviewController.valueList[index].id);
+                                  Get.snackbar(
+                                    'Data Deleted',
+                                    'Data Deleted Successfully',
+                                    colorText: Colors.red,
+                                    duration: Duration(milliseconds: 500),
+                                    snackPosition: SnackPosition.BOTTOM,
+                                  );
+                           }, child: Padding(
+                             padding: const EdgeInsets.only(left: 30),
+                             child: Image.asset('assets/images/delete.png',height: 16,width: 16,),
+                           ),
+                           ),
+                        ],
                       ),
                     ),
                   ),
+            
                 );
               }
               //If enddate is Notempty but entime is empty
@@ -228,37 +213,30 @@ class NoteDateFormat extends StatelessWidget {
                     Get.to(AddToDo());
                   },
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5)
-                            .copyWith(top: 0),
+                    padding: const EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 8),
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
+                     // width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         border: Border.all(width: 1, color: Color(0XFFDCDCDC)),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16, top: 16, bottom: 16),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${listviewController.valueList[index].titleText}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0XFF212121)),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10,top: 4,bottom: 4),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                   Text(
+                                '${listviewController.valueList[index].titleText}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0XFF212121)),
+                              ),
+                                  Text(
                                     '${listviewController.valueList[index].noteText}',
                                     style: TextStyle(
                                       fontSize: 16,
@@ -266,36 +244,34 @@ class NoteDateFormat extends StatelessWidget {
                                       color: Color(0XFF8A8A8A),
                                     ),
                                     overflow: TextOverflow
-                                        .ellipsis, // Add this line to handle overflow
+                                    .ellipsis,
                                   ),
-                                ),
-                                IconButton(
-                                  onPressed: () async {
-                                    await spHandler.deleteAfterLoadData(
-                                        listviewController.valueList[index].id);
-                                    Get.snackbar(
-                                      'Data Deleted',
-                                      'Data Deleted Successfully',
-                                      colorText: Colors.red,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    );
-                                  },
-                                  icon: Icon(Icons.delete),
-                                  iconSize: 20,
-                                  color: Color(0XFFFF4949),
-                                ),
-                              ],
+                                   Text(
+                                  '${listviewController.valueList[index].startDate} - ${listviewController.valueList[index].endDate} at ${listviewController.valueList[index].startTime}'),
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                                '${listviewController.valueList[index].startDate} at ${listviewController.valueList[index].startTime} - ${listviewController.valueList[index].endDate}'),
-                          ],
-                        ),
+                          ),
+                          TextButton(onPressed: ()async{
+                                await spHandler.deleteAfterLoadData(
+                                      listviewController.valueList[index].id);
+                                  Get.snackbar(
+                                    'Data Deleted',
+                                    'Data Deleted Successfully',
+                                    colorText: Colors.red,
+                                    duration: Duration(milliseconds: 500),
+                                    snackPosition: SnackPosition.BOTTOM,
+                                  );
+                           }, child: Padding(
+                             padding: const EdgeInsets.only(left: 30),
+                             child: Image.asset('assets/images/delete.png',height: 16,width: 16,),
+                           ),
+                           ),
+                        ],
                       ),
                     ),
                   ),
+            
                 );
               }
               //if endDate is not empty and endtime is notEmpty
@@ -318,38 +294,31 @@ class NoteDateFormat extends StatelessWidget {
                         listviewController.valueList[index].endTime;
                     Get.to(AddToDo());
                   },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5)
-                            .copyWith(top: 0),
+                 child: Padding(
+                    padding: const EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 8),
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
+                     // width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         border: Border.all(width: 1, color: Color(0XFFDCDCDC)),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16, top: 16, bottom: 16),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${listviewController.valueList[index].titleText}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0XFF212121)),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10,top: 4,bottom: 4),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                   Text(
+                                '${listviewController.valueList[index].titleText}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0XFF212121)),
+                              ),
+                                  Text(
                                     '${listviewController.valueList[index].noteText}',
                                     style: TextStyle(
                                       fontSize: 16,
@@ -357,36 +326,36 @@ class NoteDateFormat extends StatelessWidget {
                                       color: Color(0XFF8A8A8A),
                                     ),
                                     overflow: TextOverflow
-                                        .ellipsis, // Add this line to handle overflow
+                                    .ellipsis,
                                   ),
-                                ),
-                                IconButton(
-                                  onPressed: () async {
-                                    await spHandler.deleteAfterLoadData(
-                                        listviewController.valueList[index].id);
-                                    Get.snackbar(
-                                      'Data Deleted',
-                                      'Data Deleted Successfully',
-                                      colorText: Colors.red,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    );
-                                  },
-                                  icon: Icon(Icons.delete),
-                                  iconSize: 20,
-                                  color: Color(0XFFFF4949),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
+                                    Text(
                                 '${listviewController.valueList[index].startDate} at ${listviewController.valueList[index].startTime} - ${listviewController.valueList[index].endDate} at ${listviewController.valueList[index].endTime}'),
-                          ],
-                        ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          TextButton(onPressed: ()async{
+                                await spHandler.deleteAfterLoadData(
+                                      listviewController.valueList[index].id);
+                                  Get.snackbar(
+                                    'Data Deleted',
+                                    'Data Deleted Successfully',
+                                    colorText: Colors.red,
+                                    duration: Duration(milliseconds: 500),
+                                    snackPosition: SnackPosition.BOTTOM,
+                                  );
+                           }, child: Padding(
+                             padding: const EdgeInsets.only(left: 30),
+                             child: Image.asset('assets/images/delete.png',height: 16,width: 16,),
+                           ),
+                           ),
+                        ],
                       ),
                     ),
                   ),
+            
+                
+                 
                 );
               }
             }),

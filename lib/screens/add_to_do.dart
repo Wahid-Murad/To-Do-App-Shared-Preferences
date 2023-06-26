@@ -10,7 +10,6 @@ import 'package:add_to_do/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class AddToDo extends StatelessWidget {
   AddToDo({super.key});
 
@@ -35,10 +34,9 @@ class AddToDo extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        //FocusScope.of(context).unfocus();
-                        //listviewController.clearAllData();
-                       // listviewController.notewordCount.value = 0;
-                        Get.back();
+                        listviewController.noteId.value = '';
+                        //Get.back();
+                        Get.offAll(HomePage());
                       },
                       icon: Icon(
                         Icons.arrow_back,
@@ -47,11 +45,17 @@ class AddToDo extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 100),
-                      child: Text(
-                        'Add ToDo',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w600),
-                      ),
+                      child: listviewController.noteId.value != ''
+                          ? Text(
+                              'Edit ToDo',
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.w600),
+                            )
+                          : Text(
+                              'Add ToDo',
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.w600),
+                            ),
                     ),
                   ],
                 ),
@@ -69,7 +73,7 @@ class AddToDo extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10)
                         .copyWith(bottom: 0),
                 child: Container(
-                  height: 48,
+                  // height: 48,
                   decoration: BoxDecoration(
                       border: Border.all(width: 1, color: Color(0XFFD1D5DB)),
                       borderRadius: BorderRadius.circular(10)),
@@ -77,12 +81,25 @@ class AddToDo extends StatelessWidget {
                     focusNode: listviewController.firstTextFieldFocus,
                     textInputAction: TextInputAction.next,
                     onSubmitted: (value) {
+           String trimmedValue = value.trim();
+           int wordCount = trimmedValue.split(' ').length;
+        // Set the trimmed value as the text field value
+        if (listviewController.titleController.toString().trim() != '') {
+          int wordCount = trimmedValue.split(' ').length;
+          // Set the trimmed value as the text field value
+          listviewController.titleController.text;
+          // Rest of your code...
+        }
                       FocusScope.of(context).requestFocus(
                           listviewController.secondTextFieldFocus);
-                      int wordCount = listviewController.titleController.text
-                          .trim()
-                          .split(' ')
-                          .length;
+                      // int wordCount = listviewController.titleController.text
+                      //     .trim()
+                      //     .split(' ')
+                      //     .length;
+                    // listviewController.titleController.text = trimmedValue;
+                    // if(listviewController.titleController.text==''){
+                    //   Get.snackbar('Error', 'Edittext error');
+                    // }
                     },
                     maxLines: 1,
                     maxLength: listviewController.titleWordLimit,
@@ -110,12 +127,13 @@ class AddToDo extends StatelessWidget {
                 ),
               ),
 
+            
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10)
                         .copyWith(bottom: 0),
                 child: Container(
-                  height: 130,
+                  // height: 130,
                   decoration: BoxDecoration(
                       border: Border.all(width: 1, color: Color(0XFFD1D5DB)),
                       borderRadius: BorderRadius.circular(10)),
@@ -240,12 +258,12 @@ class AddToDo extends StatelessWidget {
               CustomButton(
                 width: 200,
                 heiht: 48,
-                title: 'Add',
+                title: listviewController.noteId.value != '' ? 'Edit' : 'Add',
                 onPressed: () async {
-                  // FocusScope.of(context).unfocus();
+                  print(listviewController.noteId.value);
                   SpHandler spHandler = SpHandler();
-                  if (listviewController.titleController.text == '' ||
-                      listviewController.noteController.text == '' ||
+                  if (listviewController.titleController.toString().trim() == ''||
+                      listviewController.noteController.toString().trim() == ''||
                       datePickerController.dateortimepicker.value == "" ||
                       dateTimeHandler.startTime.value == "") {
                     listviewController.titleController;
@@ -257,32 +275,47 @@ class AddToDo extends StatelessWidget {
                     Get.snackbar('Required Data Not Filled Properly',
                         'Plesae Fill all Required fields',
                         colorText: Colors.red,
+                        duration: Duration(seconds: 1),
                         snackPosition: SnackPosition.BOTTOM);
-                  } 
-                  else if (listviewController.noteId.value == '') {
-                      print('new ${listviewController.noteId.value}');
-                      await spHandler.saveData();
-                      await spHandler.loadData();
-                        listviewController.clearAllData();
+                  } else if (listviewController.noteId.value == '') {
+                    print('new ${listviewController.noteId.value}');
+                    await spHandler.saveData();
+                    await spHandler.loadData();
+                    listviewController.clearAllData();
                     Get.snackbar('Data added', 'Data add Successfully',
                         colorText: Colors.green,
+                        duration: Duration(milliseconds: 500),
                         snackPosition: SnackPosition.BOTTOM);
-                         Get.to(() => HomePage());
-                     }
-                      else if(listviewController.noteId.value != ''){
-                        print('Edit ${listviewController.noteId.value}');
-                      await spHandler.editNote(listviewController.noteId.value, listviewController.titleController.text, listviewController.noteController.text, datePickerController.dateortimepicker.value, datePickerController.dateortimepicker2.value, dateTimeHandler.startTime.value, dateTimeHandler.endTime.value);
-                      await spHandler.loadEditedData();
-                      listviewController.noteId.value='';
-                      datePickerController.selectedStartDate.value;
-                       listviewController.notewordCount.value;
-                       Get.snackbar('Data Updated',
-                        'Data Updated Successfully',
+                    Get.offAll(() => HomePage());
+                  } 
+                  //  else if(listviewController.noteId.value!=''){
+                  //      @override
+                  //   onBackPressed() {
+                  //     listviewController.noteId.value = '';
+                  //   //  return true;
+                  //   }
+                  // }
+                  else if (listviewController.noteId.value != '') {
+                    //listviewController.noteId.value='';
+                    print('Edit ${listviewController.noteId.value}');
+                    await spHandler.editNote(
+                        listviewController.noteId.value,
+                        listviewController.titleController.text,
+                        listviewController.noteController.text,
+                        datePickerController.dateortimepicker.value,
+                        datePickerController.dateortimepicker2.value,
+                        dateTimeHandler.startTime.value,
+                        dateTimeHandler.endTime.value);
+                    await spHandler.loadEditedData();
+                    listviewController.noteId.value = '';
+                    datePickerController.selectedStartDate.value;
+                    Get.snackbar('Data Updated', 'Data Updated Successfully',
                         colorText: Colors.blue,
+                        duration: Duration(milliseconds: 500),
                         snackPosition: SnackPosition.BOTTOM);
-                         Get.to(() => HomePage());
-                     }
-                
+                    //Get.to(() => HomePage());
+                    Get.offAll(HomePage());
+                  }
                 },
               ),
             ],

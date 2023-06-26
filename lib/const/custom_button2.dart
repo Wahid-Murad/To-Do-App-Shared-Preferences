@@ -37,8 +37,8 @@ Widget CustomButton2(width, buttonText, startorEnd) {
               child: Text(
                 buttonText,
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
                     color: Colors.red),
               ),
             ),
@@ -52,7 +52,7 @@ Widget CustomButton2(width, buttonText, startorEnd) {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: Colors.green),
+                    color: Colors.blue),
               ),
             ),
           ),

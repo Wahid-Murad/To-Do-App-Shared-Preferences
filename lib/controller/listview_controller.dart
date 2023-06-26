@@ -27,7 +27,6 @@ class ListviewController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    
     //for initially hide the keyboard
      SystemChannels.textInput.invokeMethod('TextInput.hide');
     super.onInit();
